@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+#import <TargetConditionals.h>
+
+// watchOS has no AVCapture / CALayer; the capture API is unavailable there so the
+// rest of the library (encoding / decoding) can be built for watchOS.
+#if !TARGET_OS_WATCH
+
 #import <AVFoundation/AVFoundation.h>
 
 @protocol ZXCaptureDelegate, ZXReader;
@@ -72,3 +78,5 @@
 - (void)enableHeuristic;
 
 @end
+
+#endif // !TARGET_OS_WATCH
